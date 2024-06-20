@@ -9,7 +9,6 @@ export const INITIAL_USER = {
   bio: ''
 },
 
-const AuthContext = () => {
   return (
     <div>AuthContext</div>
   )
