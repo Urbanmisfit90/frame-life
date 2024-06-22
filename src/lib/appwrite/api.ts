@@ -55,11 +55,24 @@ export async function saveUserToDB(user: {
 
 export async function signInAccount(user: {email: string; password: string; }) {
   try {
+    // Check for existing session
+    try {
+      const currentSession = await account.getSession('current');
+      if (currentSession) {
+        // Delete the existing session
+        await account.deleteSession('current');
+      }
+    } catch (error) {
+      console.log('No active session to delete:', error);
+    }
+
+    // Create a new session
     const session = await account.createEmailSession(user.email, user.password);
 
     return session;
   } catch (error) {
-    console.log(error)
+    console.log(error);
+    return error;
   }
 }
 
@@ -80,5 +93,15 @@ export async function getCurrentUser() {
     return currentUser.documents[0]
   } catch (error) {
     console.log(error);
+  }
+}
+
+export async function signOutAccount() {
+  try {
+    const session = await account.deleteSession("current");
+
+    return session
+  } catch (error) {
+    console.log(error)
   }
 }
