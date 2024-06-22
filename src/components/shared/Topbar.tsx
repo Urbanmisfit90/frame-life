@@ -10,7 +10,7 @@ const Topbar = () => {
   const { user } = useUserContext();
 
   useEffect(() => {
-    if (isSuccess) navigate('/'); // Navigate to root path on signout success
+    if (isSuccess) navigate(0);
   }, [isSuccess]);
 
   return (
