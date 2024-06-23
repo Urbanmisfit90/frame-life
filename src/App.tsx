@@ -7,6 +7,8 @@ import AuthLayout from './_auth/AuthLayout';
 import RootLayout from './_root/pages/RootLayout';
 import { Toaster } from "@/components/ui/toaster"
 
+import './globals.css';
+
 const App = () => {
   return (
     <main className='flex h-screen'>
@@ -20,8 +22,15 @@ const App = () => {
         {/* private routes */}
         <Route element={<RootLayout />}>
           <Route index element={<Home />}/>
+          <Route path="/explore" element={<Explore />} />
+          <Route path="/saved" element={<Saved />} />
+          <Route path="/all-users" element={<AllUsers />} />
+          <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/update-post/:id" element={<EditPost />} />
+          <Route path="/post/:id" element={<PostDetails />} />
+          <Route path="/profile/:id/*" element={<Profile />} />
+          <Route path="/update-profile/:id" element={<UpdateProfile />} />
         </Route>
-        <Route index element={<Home />} />
       </Routes>
 
       <Toaster />
