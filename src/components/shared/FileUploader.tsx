@@ -8,15 +8,14 @@ type FileUploaderProps = {
 };
 
 const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
-  const [file, setFile] = useState<File[]>([]);  
+  const [file, setFile] = useState([]);  
   const [fileUrl, setFileUrl] = useState('');
 
-  const onDrop = useCallback(
-    (acceptedFiles: FileWithPath[]) => {
+  const onDrop = useCallback((acceptedFiles: FileWithPath) => {
       setFile(acceptedFiles);
       fieldChange(acceptedFiles);
       setFileUrl(URL.createObjectURL(acceptedFiles[0]));
-    }, [fieldChange]
+    }, [file]
   );
 
   const { getRootProps, getInputProps } = useDropzone({
