@@ -105,3 +105,4 @@ export async function signOutAccount() {
     console.log(error)
   }
 }
+
