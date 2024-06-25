@@ -14,7 +14,6 @@ import { useCreatePost } from "@/lib/react-query/queriesAndMutations";
 import { useUserContext } from "@/context/AuthContext"
 import { useToast } from "../ui/use-toast"
 
-
 type PostFormProps = {
   post?: Models.Document
 }
@@ -37,7 +36,7 @@ const PostForm = ({ post }: PostFormProps) => {
     })
    
     // 2. Define a submit handler.
-    async function onSubmit (values: z.infer<typeof PostValidation>) {
+    async function onSubmit(values: z.infer<typeof PostValidation>) {
       const newPost = await createPost({
         ...values,
         userId: user.id
