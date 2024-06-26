@@ -116,7 +116,7 @@ export async function createPost(post: INewPost) {
     // Get file url
     const fileUrl = getFilePreview(uploadedFile.$id)
 
-    if(!fileUrl) {throw Error;
+    if(!fileUrl) {
       deleteFile(uploadedFile.$id)
       throw Error;
     }
@@ -131,7 +131,7 @@ export async function createPost(post: INewPost) {
     ID.unique(),
     {
       creator: post.userId,
-      cpation: post.caption,
+      caption: post.caption,
       imageUrl: fileUrl,
       imageId: uploadedFile.$id,
       location: post.location,
@@ -150,7 +150,7 @@ export async function createPost(post: INewPost) {
   }
 }
 
-export async function uploadedFile(file: File) {
+export async function uploadFile(file: File) {
   try {
     const uploadedFile = await storage.createFile(
       appwriteConfig.storageId,
@@ -164,11 +164,11 @@ export async function uploadedFile(file: File) {
   }
 }
 
-export async function getFilePreview(fileID: string){
+export async function getFilePreview(fileId: string){
   try {
     const fileUrl = storage.getFilePreview(
       appwriteConfig.storageId,
-      fileID,
+      fileId,
       2000,
       2000,
       "top",
