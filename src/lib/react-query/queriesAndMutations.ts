@@ -30,6 +30,6 @@ export const useSignOutAccount= () => {
 
 export const useCreatePost = () => {
   return useMutation({
-    mutationFn: (post) => createPost(post),
+    mutationFn: (post: unknown) => createPost(post),
   });
 };
