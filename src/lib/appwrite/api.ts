@@ -22,7 +22,6 @@ export async function createUserAccount(user: INewUser) {
       name: newAccount.name,
       email: newAccount.email,
       username: user.username,
-      imageUrl: avatarUrl,
     });
 
     return newUser;
@@ -36,7 +35,6 @@ export async function saveUserToDB(user: {
   accountId: string;
   email: string;
   name: string;
-  imageUrl: URL;
   username?: string;
 }) {
   try {
