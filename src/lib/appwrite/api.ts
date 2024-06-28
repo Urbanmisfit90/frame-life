@@ -178,7 +178,7 @@ export function getFilePreview(fileId: string): string {
     return fileUrl.href;
   } catch(error) {
     console.log(error)
-    return '';
+    throw error;
   }
 }
 
