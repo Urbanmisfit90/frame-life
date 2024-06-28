@@ -22,6 +22,7 @@ export async function createUserAccount(user: INewUser) {
       name: newAccount.name,
       email: newAccount.email,
       username: user.username,
+      imageUrl: avatarUrl.href
     });
 
     return newUser;
@@ -36,6 +37,7 @@ export async function saveUserToDB(user: {
   email: string;
   name: string;
   username?: string;
+  imageUrl?: string;
 }) {
   try {
     const newUser = await databases.createDocument(
@@ -162,7 +164,7 @@ export async function uploadFile(file: File) {
   }
 }
 
-export async function getFilePreview(fileId: string){
+export function getFilePreview(fileId: string): string {
   try {
     const fileUrl = storage.getFilePreview(
       appwriteConfig.storageId,
@@ -172,10 +174,11 @@ export async function getFilePreview(fileId: string){
       "top",
       100,
     )
-
-    return fileUrl;
+    
+    return fileUrl.href;
   } catch(error) {
     console.log(error)
+    throw error;
   }
 }
 
