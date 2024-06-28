@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useUserContext } from "@/context/AuthContext";
 import { useDeleteSavedPost, useLikePost, useSavePost } from "@/lib/react-query/queriesAndMutations";
 import { Models } from "appwrite"
@@ -21,7 +21,7 @@ const PostStats = ({ post, userId } : PostStatsProps) => {
 
   const { data: currentUser } = useUserContext();
 
-  const handleLikePost = () => {}
+  const handleLikePost = (e: React.MouseEvent) => {}
 
   const handleSavePost = () => {}
 
@@ -51,7 +51,7 @@ const PostStats = ({ post, userId } : PostStatsProps) => {
         alt="like"
         width={20}
         height={20}
-        onClick={() => {}}
+        onClick={handleSavePost}
         className="cursor-pointer"
         />
       </div>
