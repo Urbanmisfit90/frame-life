@@ -20,6 +20,10 @@ const PostStats = ({ post, userId } : PostStatsProps) => {
 
   const { data: currentUser } = useUserContext();
 
+  const handleLikePost = () => {}
+
+  const handleSavePost = () => {}
+
   return (
     <div className="flex justify-between items-center z-20">
       <div className="flex gap-2 mr-5">
