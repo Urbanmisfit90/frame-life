@@ -10,7 +10,7 @@ type PostStatsProps = {
   }
   
   const PostStats = ({ post, userId } : PostStatsProps) => {
-    const likesList = post.likes.map((user: Models.Document) => user.$id);
+  const likesList = post.likes.map((user: Models.Document) => user.$id);
   
     const [likes, setLikes] = useState(likesList);
     const [isSaved, setIsSaved] = useState(false);
@@ -25,7 +25,7 @@ type PostStatsProps = {
 
     useEffect(() => {
       setIsSaved(!!savedPostRecord)
-    }, [currentUser]);
+    }, [currentUser, savedPostRecord]);
   
     const handleLikePost = (e: React.MouseEvent) => {
       e.stopPropagation();
