@@ -2,6 +2,7 @@ import { ID, Query } from 'appwrite';
 
 import { INewPost, INewUser } from "@/types";
 import { account, appwriteConfig, avatars, databases, storage } from './config';
+import { error } from 'console';
 
 export async function createUserAccount(user: INewUser) {
   try {
@@ -256,6 +257,21 @@ export async function deleteSavedPost(savedRecordId: string) {
     if(!statusCode) throw Error;
 
     return { status: 'OK'};
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function getPostById(postId?: string) {
+  if(!postId) throw Error
+  try {
+    const post = await databases.getDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      postId
+    )
+
+    return post;
   } catch (error) {
     console.log(error)
   }
