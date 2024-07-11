@@ -15,7 +15,7 @@ const SearchResults = ({ isSearchFetching, searchedPosts }: SearchResultsProps) 
   <GridPostList posts={searchedPosts.documents} />
   )
     }
-    
+
   return (
     <p className="text-light-4 mt-10 text-center w-full">No results found</p>
   )
