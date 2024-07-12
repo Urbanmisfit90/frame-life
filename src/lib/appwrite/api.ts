@@ -210,25 +210,39 @@ export async function getSavedPosts() {
     const savedRecords = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.savesCollectionId,
-    )
+    );
+
+    console.log('savedRecords:', savedRecords); // Log the saved records to inspect their structure
 
     if (!savedRecords) throw Error;
 
     const savedPosts = await Promise.all(savedRecords.documents.map(async (record) => {
-      const post = await databases.getDocument(
-        appwriteConfig.databaseId,
-        appwriteConfig.postCollectionId,
-        record.post
-      )
-      return post
-    }))
+      console.log('record:', record); // Log each record to inspect its structure
 
-    return { documents: savedPosts }
+      // Assuming record.post is an ID
+      const postId = record.post?.$id; // Adjust this line if the ID is nested differently
+      console.log('postId:', postId); // Log the postId to check its value
+
+      if (postId && typeof postId === 'string') {
+        const post = await databases.getDocument(
+          appwriteConfig.databaseId,
+          appwriteConfig.postCollectionId,
+          postId
+        );
+        return post;
+      } else {
+        console.error('Invalid post ID:', postId);
+        throw new Error('Invalid post ID');
+      }
+    }));
+
+    return { documents: savedPosts };
   } catch (error) {
     console.log(error);
     throw error;
   }
 }
+
 
 export async function likePost(postId: string, likesArray: string[]) {
   try {
