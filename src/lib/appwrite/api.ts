@@ -212,16 +212,16 @@ export async function getSavedPosts() {
       appwriteConfig.savesCollectionId,
     );
 
-    console.log('savedRecords:', savedRecords); // Log the saved records to inspect their structure
+   // console.log('savedRecords:', savedRecords); // Log the saved records to inspect their structure
 
     if (!savedRecords) throw Error;
 
     const savedPosts = await Promise.all(savedRecords.documents.map(async (record) => {
-      console.log('record:', record); // Log each record to inspect its structure
+     // console.log('record:', record); // Log each record to inspect its structure
 
       // Assuming record.post is an ID
       const postId = record.post?.$id; // Adjust this line if the ID is nested differently
-      console.log('postId:', postId); // Log the postId to check its value
+      // console.log('postId:', postId); // Log the postId to check its value
 
       if (postId && typeof postId === 'string') {
         const post = await databases.getDocument(

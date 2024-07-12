@@ -1,4 +1,3 @@
-import React from 'react';
 import Loader from '@/components/shared/Loader';
 import PostCard from '@/components/shared/PostCard';
 import { useGetSavePosts } from '@/lib/react-query/queriesAndMutations';
