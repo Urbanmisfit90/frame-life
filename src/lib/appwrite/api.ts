@@ -1,4 +1,4 @@
-import { ID, Query } from 'appwrite';
+import { ID, Query, databases } from 'appwrite';
 
 import { INewPost, INewUser, IUpdatePost } from "@/types";
 import { account, appwriteConfig, avatars, databases, storage } from './config';
@@ -205,6 +205,31 @@ export async function getRecentPosts() {
   return posts;
 }
 
+export async function getSavedPosts() {
+  try {
+    const savedRecords = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.savesCollectionId,
+    )
+
+    if (!savedRecords) throw Error;
+
+    const savedPosts = await Promise.all(savedRecords.documents.map(async (record) => {
+      const post = await databases.getDocument(
+        appwriteConfig.databaseId,
+        appwriteConfig.postCollectionId,
+        record.post
+      )
+      return post
+    }))
+
+    return { documents: savedPosts }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
 export async function likePost(postId: string, likesArray: string[]) {
   try {
     const updatedPost = await databases.updateDocument(
@@ -391,3 +416,4 @@ export async function searchPosts(searchTerm: string) {
     console.log(error)
   }
 }
+
