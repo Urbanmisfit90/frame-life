@@ -431,3 +431,19 @@ export async function searchPosts(searchTerm: string) {
   }
 }
 
+export async function getAllUsers() {
+  try {
+    const users = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      [Query.limit(20)]  // Example: Limiting to 20 users, adjust as needed
+    );
+
+    if (!users) throw Error('Failed to fetch users');
+
+    return users;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
