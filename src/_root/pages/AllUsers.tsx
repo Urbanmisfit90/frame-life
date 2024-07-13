@@ -1,4 +1,3 @@
-import React from 'react';
 import Loader from '@/components/shared/Loader';
 import { useGetUsers } from '@/lib/react-query/queriesAndMutations';
 import { Models } from 'appwrite';
